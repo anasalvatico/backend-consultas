@@ -6,7 +6,7 @@ import java.util.List;
 
 @Service
 public class PacienteService {
-    private PacienteRepository repository;
+    private final PacienteRepository repository;
     public PacienteService(PacienteRepository repository) {
         this.repository = repository;
     }
@@ -18,4 +18,10 @@ public class PacienteService {
     public List<Paciente> listar() {
         return repository.findAll();
     }
+
+    public Paciente buscarPorId(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
+    }
+
 }
